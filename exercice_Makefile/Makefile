@@ -23,17 +23,16 @@ stubs.o: CFLAGS = -g -O2
 
 #Règles
 $(EXE): $(OBJS)
-	$(LINK.o) $(LDFLAGS) $^ $(LDLIBS) $@
+	$(LINK.o)  $^ $(LDLIBS) $@
 
 #Gestion des dependances en .d
 -include $(subst .o,.d,$(OBJS))
 
-%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -M -MF $@\
--MP $<
+%.d: %.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -M -MF $@ -MP $<
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(EXE) *.d
 
 #En cas de présence d'un fichier au nom de "clean"
 .PHONY: clean
