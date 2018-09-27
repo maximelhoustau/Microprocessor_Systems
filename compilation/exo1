@@ -1,0 +1,33 @@
+#Declaration variable globale a, lien entre registre 0 et l'@ de a
+#r1: valeur de a
+ldr r0, =a
+ldr r1, [r0]
+
+#Declaration variable i, initialisation en mémoire à 0
+#r3: valeur de i
+#r2: lien à i
+ldr r2, =i
+mov r3, #0
+str r3, [r2]
+
+loop:
+
+#Z <- r3 - r1
+CMP r3, r1
+
+#Lecture du Z du psr
+ldr r4,#30
+
+if ~r4 goto end
+...
+g()
+...
+
+#Dans registre 0 valeur du i incrémenté
+ADD r0,r3,#1
+str r0, [r2]
+ldr r3, r2
+
+goto loop
+
+end:
