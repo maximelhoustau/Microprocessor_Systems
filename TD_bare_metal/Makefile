@@ -8,7 +8,7 @@ OBJS = main.o
 LDSCRIPT = ld_ram.lds
 EXE = main
 
-main: main.o
+main: main.o 
 
 START: .gdbinit
 	JLinkGDBServer -device STM32L475VG -endian little -if SWD -speed auto -ir -LocalhostOnly

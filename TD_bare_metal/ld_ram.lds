@@ -10,14 +10,14 @@ MEMORY
   .text : {
     *(.text)
     } > sram1
-  .rodata : AT (ADDR(.text) + SIZEOF(.text)){
+  .rodata : {
     *(.rodata)
-    }
-  .data 0x2000 : {
+    } > sram1
+  .data  : {
     *(.data)
-    } AT> sram1
-  .bss 0x3000 : {
+    } > sram1
+  .bss  : {
     *(.bss) *(COMMON)
-    }
+    } > sram1
  }
  ENTRY(main)
