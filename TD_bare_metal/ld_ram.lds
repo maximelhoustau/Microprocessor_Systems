@@ -1,4 +1,3 @@
-//Mapping memory given
 MEMORY
 {
  rom (rx) : ORIGIN = 0x00000000, LENGTH = 1M
@@ -8,7 +7,6 @@ MEMORY
 
  SECTIONS
  {
-  .= sram1
   .text : {
     *(.text)
     } > sram1
@@ -22,3 +20,4 @@ MEMORY
     *(.bss) *(COMMON)
     }
  }
+ ENTRY(main)
