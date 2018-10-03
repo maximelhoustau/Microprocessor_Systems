@@ -1,9 +1,8 @@
-CC = arm-none-eabi-gcc
+CC = gcc
 
 #Drapeaux de l'exercice
-CFLAGS = -Wall -Werror -g -O1 -mthumb
+CFLAGS = -Wall -Werror -g -O1
 LDLIBS = -lm
-LDFLAGS = -mthumb
 
 SOURCES = exo2.c
 OBJS = exo2.o
