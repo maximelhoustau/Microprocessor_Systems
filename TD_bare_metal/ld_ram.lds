@@ -5,7 +5,9 @@ MEMORY
  sram2 (wx) : ORIGIN = 0x10000000, LENGTH = 32K
  }
 
-_stack = ORIGIN(sram2)+LENGTH(sram2) ;
+_stack = ORIGIN(sram2)+LENGTH(sram2);
+_bss = ORIGIN(sram1);
+_bss_size = _bss + LENGTH(sram1);
 
  SECTIONS
  {
