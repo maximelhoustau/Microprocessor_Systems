@@ -1,18 +1,13 @@
 int fibo(int n);
 
-//Calcule les termes de l asuite de Fibonacci
-int fibo(int n){
-  int f0 = 0;
-  int f1 = 1;
-  int f2;
-  for(int i=0; i<n; i++ ){
-    f2 = f1 + f0;
-    f0 = f1;
-    f1 = f2;
-  }
-  return (f2);
+//Calcule les termes de la suite de Fibonacci
+int fib(int n){
+  if (n < 2)
+    return n;
+  else
+    return fib(n-1) + fib(n-2);
 }
 
 int main() {
-return fibo(8);
+return fib(8);
 }

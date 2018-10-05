@@ -1,7 +1,9 @@
 CC = arm-none-eabi-gcc
 AS = arm-none-eabi-as
 CFLAGS = -g -O1
+ASFLAGS = -g
 TARGET_ARCH = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
+TARGET_MACH = $(TARGET_ARCH)
 LDFLAGS = -T ld_ram.lds -nostdlib
 
 SOURCES = main.c
