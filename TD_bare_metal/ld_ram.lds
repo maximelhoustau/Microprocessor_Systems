@@ -1,3 +1,5 @@
+ENTRY(main)
+
 MEMORY
 {
  rom (rx) : ORIGIN = 0x00000000, LENGTH = 1M
@@ -20,4 +22,3 @@ MEMORY
     *(.bss) *(COMMON)
     } > sram1
  }
- ENTRY(main)
