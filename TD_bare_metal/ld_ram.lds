@@ -5,23 +5,23 @@ MEMORY
  sram2 (wx) : ORIGIN = 0x10000000, LENGTH = 32K
  }
 
-_stack = ORIGIN(sram2)+LENGTH(sram2);
-_bss = ORIGIN(sram1);
-_bss_size = _bss + LENGTH(sram1);
+_stack = ORIGIN(sram2)+LENGTH(sram2) ;
 
  SECTIONS
  {
   .text : {
-    *(.text)
     } > sram1
   .rodata : {
     *(.rodata)
     } > sram1
   .data  : {
+    _data = . ;
     *(.data)
     } > sram1
   .bss  : {
+    _bss = . ;
     *(.bss) *(COMMON)
+    _bss_size = . ;
     } > sram1
  }
 

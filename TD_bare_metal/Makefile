@@ -7,12 +7,12 @@ TARGET_MACH = $(TARGET_ARCH)
 LDFLAGS = -T ld_ram.lds -nostdlib
 
 SOURCES = main.c
-OBJS = main.o crt0.o
+OBJS = main.o crt0.o init.o
 ASS = crt0.s
 LDSCRIPT = ld_ram.lds
 EXE = main
 
-main: main.o crt0.o
+main: main.o crt0.o init.o
 
 START: .gdbinit
 	JLinkGDBServer -device STM32L475VG -endian little -if SWD -speed auto -ir -LocalhostOnly

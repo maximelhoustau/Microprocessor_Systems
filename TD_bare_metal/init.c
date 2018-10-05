@@ -1,10 +1,10 @@
-extern int * _bss;
-extern int * _bss_size;
-extern int * _zero;
+#include <stdint.h>
 
+extern char _data, _bss, _bss_size;
+uint8_t *dst = &_data;
+
+//Mise à zero de la section .bss
 void init_bss(){
-  while(_bss < _bss_size){
-    *_bss = *_zero;
-    _bss += 4 ;
-  }
+  for (dst = (uint8_t *) &_bss; dst < (uint8_t *) &_bss_size; dst++)
+    *dst = 0;
 }
