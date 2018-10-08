@@ -1,7 +1,10 @@
 #include <stdint.h>
 
-extern char _data, _bss, _bss_size;
+//taille 32 bits pour aller plus vite
+extern uint32_t _data, _bss, _bss_size;
 uint8_t *dst = &_data;
+
+void init_bss(void);
 
 //Mise à zero de la section .bss
 void init_bss(){
