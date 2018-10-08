@@ -1,7 +1,8 @@
 #include <stdint.h>
-#include <led.h>
-#define REG_AHB2 (*(volatile uint32_t *)0x48000000)
-#define REG_GPIOB (*(volatile uint32_t *)0x48000400)
+#include "led.h"
+#define REG_AHB2_GPIOB (*(volatile uint32_t *)0x4800004C)
+#define REG_GPIOB_MODER (*(volatile uint32_t *)0x48000400)
+#define REG_GPIOB_PUPDR (*(volatile uint32_t *)0x4800040C)
 
 
 void led_g_on(void);
@@ -14,12 +15,15 @@ void led_g_off(void);
 //registre AHB2 activation de l'horloge @début: 0x50060C00 @fin: 0x48000000
 //
 void led_init(){
-	
+	REG_AHB2_GPIOB = (REG_AHB2_GPIOB | (1<<1));	
+	REG_GPIOB_MODER = (REG_GPIOB_MODER | (1<<29));
 }
 
 void led_g_on(){
+	REG_GPIOB_PUPDR = (REG_GPIOB_PUPDR & ~(1<<29));
 }
 
-void led_g_off{
+void led_g_off(){
+	REG_GPIOB_PUPDR = (REG_GPIOB_PUPDR & ~(1<<29));
 }
 
