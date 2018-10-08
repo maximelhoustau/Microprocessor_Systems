@@ -9,19 +9,19 @@ _stack = ORIGIN(sram2)+LENGTH(sram2) ;
 
  SECTIONS
  {
-  .text : {
+.text : {
+	*(.text) } > sram1
+.rodata : {
+	*(.rodata)
     } > sram1
-  .rodata : {
-    *(.rodata)
+.data  : {
+    	_data = . ;
+    	*(.data)
     } > sram1
-  .data  : {
-    _data = . ;
-    *(.data)
-    } > sram1
-  .bss  : {
-    _bss = . ;
-    *(.bss) *(COMMON)
-    _bss_size = . ;
+.bss  : {
+	 _bss = . ;
+	*(.bss) *(COMMON)
+    	_bss_size = . ;
     } > sram1
  }
 
