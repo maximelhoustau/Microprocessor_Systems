@@ -1,17 +1,21 @@
 #include <stdint.h>
 #include "led.h"
-#define REG_AHB2_GPIOB (*(volatile uint32_t *)0x4002104C)
+#define REG_CLOCK_GPIO (*(volatile uint32_t *)0x4002104C)
 #define REG_GPIOB_MODER (*(volatile uint32_t *)0x48000400)
+#define REG_GPIOC_MODER (*(volatile uint32_t *)0x48000800)
 #define REG_GPIOB_BSSR (*(volatile uint32_t *)0x48000418)
+#define REG_GPIOC_BSSR (*(volatile uint32_t *)0x48000818)
+
+//enum state {LED_BLUE, LED_YELLOW, LED_OFF};
 
 //Configuration de la broche B en mode sortie:  GPIOB_MODER reset value: 0xFFFFFEBF MODE14[1:0] = 01;
 //registre GPIOB @début: 0x48000400 @fin:  0x480007FF taille 1Kb
-//
+//Les GPIO se trouvent dans la partie AHB2
 //Activation de l'horloge:offset: 0x4C pour GPIOB bit 1 à 0/1 pour désactiver/activer
 //registre AHB2 activation de l'horloge @début pour GPIOB: 0x48000400
 //
 void led_init(){
-	REG_AHB2_GPIOB |= 0x2	;	
+	REG_CLOCK_GPIO |= 0x6	;	
 	REG_GPIOB_MODER = (REG_GPIOB_MODER | (1<<28)) & ~(1<<29);
 }
 
@@ -25,3 +29,20 @@ void led_g_off(){
 	REG_GPIOB_BSSR |= (1<<30);
 }
 
+void led(state){
+
+	switch (state){
+		case LED_YELLOW:
+			REG_GPIOC_MODER = (REG_GPIOC_MODER | (1<<18)) & ~(1<<19);
+			REG_GPIOC_BSSR |= (1<<9);
+			break;
+		case LED_BLUE:
+			REG_GPIOC_MODER = (REG_GPIOC_MODER | (1<<18)) & ~(1<<19);
+			REG_GPIOC_BSSR |= (1<<25);
+			break;
+		case LED_OFF:
+			REG_GPIOC_MODER = (REG_GPIOC_MODER & (1<<18)) & ~(1<<19);
+
+			break;
+		}
+}
