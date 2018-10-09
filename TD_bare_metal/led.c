@@ -11,15 +11,17 @@
 //registre AHB2 activation de l'horloge @début: 0x50060C00 @fin: 0x48000000
 //
 void led_init(){
-	REG_AHB2_GPIOB = (REG_AHB2_GPIOB | 0x10 );	
-	REG_GPIOB_MODER = (REG_GPIOB_MODER | (1<<28) & ~(1<<29));
+	REG_AHB2_GPIOB = 0x0	;	
+	REG_GPIOB_MODER |=  (1<<28) & ~(1<<29);
 }
 
 void led_g_on(){
-	REG_GPIOB_BSSR = (REG_GPIOB_BSSR | (1<<14));
+	//Mise à 1 du bit n°14: etat haut du port 14
+	REG_GPIOB_BSSR |= (1<<14);
 }
 
 void led_g_off(){
-	REG_GPIOB_BSSR = (REG_GPIOB_BSSR | (1<<30));
+	//Mise à un 1 du bit n°30: reset du port 14
+	REG_GPIOB_BSSR |= (1<<30);
 }
 

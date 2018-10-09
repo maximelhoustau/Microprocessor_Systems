@@ -13,11 +13,11 @@ int fib(int n){
 
 int main() {
 	led_init();
-	for (int i=0; i<10; i++){
-  		led_g_on();
-		asm volatile("nop");
-		led_g_off();
-	}
+	asm volatile("nop");
+  	led_g_on();
+	asm volatile("nop");
+	led_g_off();
+	
 
 	return 0;
 }
