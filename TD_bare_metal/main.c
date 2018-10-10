@@ -1,7 +1,7 @@
 #include "led.h"
 
 int fibo(int n);
-int test;
+void wait(int n);
 
 //Calcul des termes de la suite de Fibonacci
 int fib(int n){
@@ -11,16 +11,31 @@ int fib(int n){
     		return fib(n-1) + fib(n-2);
 }
 
-int main() {
+//Permet de voir clignoter les leds
+void wait(int n){
+	for(int i=0; i<n; i++){
+		asm volatile("nop");
+	}
+}
+
+int main(){
+	//Test de toutes les fonctions
 	led_init();
-	asm volatile("nop");
   	led_g_on();
-	asm volatile("nop");
 	led_g_off();
-	led(LED_OFF);
 	led(LED_BLUE);
 	led(LED_YELLOW);
 	led(LED_OFF);
-
+	//Puis test du clignotage
+	while(1){
+		led_g_on();
+		wait(500000);
+		led_g_off();
+		led(LED_BLUE);
+		wait(500000);
+		led(LED_YELLOW);
+		wait(500000);
+		led(LED_OFF);
+	}
 	return 0;
 }
