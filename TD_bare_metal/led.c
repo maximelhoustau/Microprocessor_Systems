@@ -10,28 +10,29 @@
 
 void led_init(){
 	SET_BIT(RCC->AHB2ENR, RCC_AHB2ENR_GPIOBEN);	
+	SET_BIT(RCC->AHB2ENR, RCC_AHB2ENR_GPIOCEN);	
 	REG_GPIOB_MODER = (REG_GPIOB_MODER | (1<<28)) & ~(1<<29);
 }
 
 void led_g_on(){
 	//Mise à 1 du bit n°14: etat haut du port 14
-	SET_BIT(REG_GPIOB_BSSR, (1<<14));
+	SET_BIT(GPIOB->BSRR, GPIO_BSRR_BS14);
 }
 
 void led_g_off(){
 	//Mise à un 1 du bit n°30: reset du port 14
-	SET_BIT(REG_GPIOB_BSSR, (1<<30));
+	SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR14);
 }
 
 void led(state color){
 	switch (color){
 		case LED_YELLOW:
-			REG_GPIOC_MODER = (REG_GPIOC_MODER | (1<<18)) & ~(1<<19);
-			SET_BIT(REG_GPIOC_BSSR, (1<<9));
+			REG_GPIOC_MODER = (REG_GPIOC_MODER | (1<<18)) & ~(1<<19);	
+			SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS9);
 			break;
 		case LED_BLUE:
 			REG_GPIOC_MODER = (REG_GPIOC_MODER | (1<<18)) & ~(1<<19);
-			SET_BIT(REG_GPIOC_BSSR, (1<<25));
+			SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR9);
 			break;
 		case LED_OFF:
 			REG_GPIOC_MODER = (REG_GPIOC_MODER & ~(1<<18)) & ~(1<<19);
