@@ -5,13 +5,13 @@ ASFLAGS = -g
 TARGET_ARCH = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 TARGET_MACH = $(TARGET_ARCH)
 LDFLAGS = -T ld_ram.lds -nostdlib
-VPATH = clocks
 
 SOURCES = main.c led.c
 OBJS = main.o crt0.o init.o led.o
 ASS = crt0.s
 LDSCRIPT = ld_ram.lds
 EXE = main 
+VPATH = clocks
 
 main: $(OBJS) clocks.o 
 

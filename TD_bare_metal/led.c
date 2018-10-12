@@ -9,7 +9,7 @@
 //registre AHB2 activation de l'horloge @début pour GPIOB: 0x48000400
 
 void led_init(){
-	SET_BIT(REG_CLOCK_GPIO, 0x6);	
+	SET_BIT(RCC->AHB2ENR, RCC_AHB2ENR_GPIOBEN);	
 	REG_GPIOB_MODER = (REG_GPIOB_MODER | (1<<28)) & ~(1<<29);
 }
 
