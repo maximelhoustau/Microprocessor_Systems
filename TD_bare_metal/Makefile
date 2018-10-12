@@ -1,10 +1,11 @@
 CC = arm-none-eabi-gcc
 AS = arm-none-eabi-as
-CFLAGS = -Wall -Werror -Wextra -g -O1
+CFLAGS = -Wall -Werror -Wextra -g -O1 -I./clocks -I./CMSIS/Device/ST/STM32L4xx/Include -I./CMSIS/Include
 ASFLAGS = -g
 TARGET_ARCH = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 TARGET_MACH = $(TARGET_ARCH)
 LDFLAGS = -T ld_ram.lds -nostdlib
+VPATH = clocks
 
 SOURCES = main.c led.c
 OBJS = main.o crt0.o init.o led.o
@@ -12,7 +13,7 @@ ASS = crt0.s
 LDSCRIPT = ld_ram.lds
 EXE = main 
 
-main: main.o crt0.o init.o led.o
+main: $(OBJS) clocks.o 
 
 led.o: led.c led.h
 

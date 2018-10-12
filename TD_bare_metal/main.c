@@ -1,4 +1,5 @@
 #include "led.h"
+#include "clocks.h"
 
 int fibo(int n);
 void wait(int n);
@@ -20,6 +21,7 @@ void wait(int n){
 
 int main(){
 	//Test de toutes les fonctions
+	clocks_init();
 	led_init();
   	led_g_on();
 	led_g_off();
