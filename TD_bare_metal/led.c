@@ -36,7 +36,7 @@ void led(state color){
 			SET_BIT(GPIOC->BSRR, GPIO_BSRR_BR9);
 			break;
 		case LED_OFF:
-			CLEAR_BIT(GPIOC->MODER, (GPIO_MODER_MODE9_1 & GPIO_MODER_MODE9_0));	
+			CLEAR_BIT(GPIOC->MODER, (GPIO_MODER_MODE9_1 | GPIO_MODER_MODE9_0));	
 			break;
 		}
 }

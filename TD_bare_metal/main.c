@@ -31,13 +31,14 @@ int main(){
 	//Puis test du clignotage
 	while(1){
 		led_g_on();
-		wait(500000);
+		wait(5000000);
 		led_g_off();
 		led(LED_BLUE);
-		wait(500000);
+		wait(5000000);
 		led(LED_YELLOW);
-		wait(500000);
+		wait(5000000);
 		led(LED_OFF);
+		wait(5000000);
 	}
 	return 0;
 }
