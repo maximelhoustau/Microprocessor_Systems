@@ -5,6 +5,7 @@ ASFLAGS = -g
 TARGET_ARCH = -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 TARGET_MACH = $(TARGET_ARCH)
 LDFLAGS = -T ld_ram.lds -nostdlib
+CPPFLAGS += -DSTM32L475xx 
 
 SOURCES = main.c led.c
 OBJS = main.o crt0.o init.o led.o
