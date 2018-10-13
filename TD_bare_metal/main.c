@@ -5,7 +5,7 @@
 
 int fibo(int n);
 void wait(int n);
-uint8_t test;
+const uint8_t test = 75;
 
 //Calcul des termes de la suite de Fibonacci
 int fib(int n){
@@ -26,7 +26,6 @@ int main(){
 	//Test de toutes les fonctions
 	clocks_init();
 	uart_init();
-	uart_putchar(100);
-	test = uart_getchar();	
+	uart_puts(test);
 	return 0;
 }
