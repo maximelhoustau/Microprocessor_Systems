@@ -1,6 +1,5 @@
 #include "stm32l4xx.h"
-
-void uart_init(void);
+#include "uart.h"
 
 void uart_init(){
 	//Activation horloge port B
