@@ -1,5 +1,6 @@
 #include "led.h"
 #include "clocks.h"
+#include "uart.h"
 
 int fibo(int n);
 void wait(int n);
