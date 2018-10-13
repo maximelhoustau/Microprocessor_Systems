@@ -5,6 +5,7 @@
 
 int fibo(int n);
 void wait(int n);
+uint8_t test;
 
 //Calcul des termes de la suite de Fibonacci
 int fib(int n){
@@ -23,25 +24,9 @@ void wait(int n){
 
 int main(){
 	//Test de toutes les fonctions
-	uart_init();
 	clocks_init();
-	led_init();
-  	led_g_on();
-	led_g_off();
-	led(LED_BLUE);
-	led(LED_YELLOW);
-	led(LED_OFF);
-	//Puis test du clignotage
-	while(1){
-		led_g_on();
-		wait(5000000);
-		led_g_off();
-		led(LED_BLUE);
-		wait(5000000);
-		led(LED_YELLOW);
-		wait(5000000);
-		led(LED_OFF);
-		wait(5000000);
-	}
+	uart_init();
+	uart_putchar(100);
+	test = uart_getchar();	
 	return 0;
 }
