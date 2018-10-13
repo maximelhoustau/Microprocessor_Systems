@@ -21,6 +21,7 @@ void wait(int n){
 
 int main(){
 	//Test de toutes les fonctions
+	uart_init();
 	clocks_init();
 	led_init();
   	led_g_on();
