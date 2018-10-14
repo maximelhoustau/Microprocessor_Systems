@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stddef.h>
 #include "stm32l4xx.h"
 #include "uart.h"
 
@@ -33,7 +34,7 @@ void uart_putchar(uint8_t c){
 
 uint8_t uart_getchar(){
 	while ( ! READ_BIT( USART1->ISR, USART_ISR_RXNE));
-	return ( (uint8_t) READ_REG(USART1->RDR));
+	return  (uint8_t) READ_REG(USART1->RDR) ;
 }
 
 void uart_puts(const uint8_t *s){
@@ -45,13 +46,14 @@ void uart_puts(const uint8_t *s){
 	uart_putchar('\r');
 }
 
-void uart_gets(uint8_t *s, uint16_t size){
-	uint16_t overrun;
-	while ( *s != '\n'){
-		if (overrun >= size) break;
-		uart_getchar(*s);
+void uart_gets(uint8_t *s, size_t size){
+	size_t overrun = 0;
+	while ( uart_getchar() != '\n'){
+		if (overrun >= size - 1) break;
+		*s = uart_getchar();
 		s++;
  		overrun++;		
 	}
+	*s = '\0';
 
 }

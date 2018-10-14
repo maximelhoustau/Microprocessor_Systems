@@ -21,7 +21,7 @@ led.o: led.c led.h
 start: .gdbinit
 	JLinkGDBServer -device STM32L475VG -endian little -if SWD -speed auto -ir -LocalhostOnly
 pico:
-	picocom -b 115200 -f n -p n -d 8 /dev/cu.usbmodem1421
+	picocom --omap crlf -b 115200 -f n -p n -d 8 /dev/cu.usbmodem1421
 gdb: main
 	arm-none-eabi-gdb main
 

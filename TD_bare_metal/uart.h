@@ -5,6 +5,6 @@ void uart_init(void);
 void uart_putchar(uint8_t c);
 uint8_t uart_getchar(void);
 void uart_puts(const uint8_t *s);
-void uart_gets(uint8_t *s, uint16_t size);
+void uart_gets(uint8_t *s, size_t size);
 
 #endif

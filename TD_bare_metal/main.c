@@ -1,11 +1,13 @@
 #include <stdint.h>
+#include <stddef.h>
 #include "led.h"
 #include "clocks.h"
 #include "uart.h"
 
 int fibo(int n);
 void wait(int n);
-const uint8_t test = 75;
+size_t size = 1024;
+uint8_t test;
 
 //Calcul des termes de la suite de Fibonacci
 int fib(int n){
@@ -24,8 +26,14 @@ void wait(int n){
 
 int main(){
 	//Test de toutes les fonctions
+	//uint8_t s[size];
 	clocks_init();
 	uart_init();
-	uart_puts(test);
+	test = uart_getchar();
+	test = uart_getchar();
+	/*while(1){
+		uart_gets(s, size);
+		uart_puts(s);
+	}*/
 	return 0;
 }
