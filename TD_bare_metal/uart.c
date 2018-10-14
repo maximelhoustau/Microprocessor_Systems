@@ -55,5 +55,15 @@ void uart_gets(uint8_t *s, size_t size){
  		overrun++;		
 	}
 	*s = '\0';
-
 }
+
+uint32_t checksum(){
+	uint32_t sum_size = 1000;
+	uint32_t ope = 0;
+	uint32_t sum = 0;
+	while(ope<sum_size){
+		sum += uart_getchar();
+	}
+	return sum;
+}
+

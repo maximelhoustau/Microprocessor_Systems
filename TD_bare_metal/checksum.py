@@ -14,7 +14,7 @@ Then display the sum (on 32 bits in hexadecimal) of the bytes sent.
 def main():
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("-p", "--port",
-                        help="Set the USB port to use for serial communication. Default to /dev/ttyACM0.",
+                        help="Set the USB port to use for serial communication. Default to /dev/cu.usbmodem1421.",
                         type=str,
                         default="/dev/cu.usbmodem1421")
     parser.add_argument("-s", "--speed",

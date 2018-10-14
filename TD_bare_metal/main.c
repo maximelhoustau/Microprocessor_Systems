@@ -7,7 +7,7 @@
 int fibo(int n);
 void wait(int n);
 size_t size = 1024;
-uint8_t test;
+uint32_t test;
 
 //Calcul des termes de la suite de Fibonacci
 int fib(int n){
@@ -29,11 +29,11 @@ int main(){
 	//uint8_t s[size];
 	clocks_init();
 	uart_init();
-	test = uart_getchar();
-	test = uart_getchar();
 	/*while(1){
 		uart_gets(s, size);
 		uart_puts(s);
 	}*/
+	test = checksum();
+
 	return 0;
 }
