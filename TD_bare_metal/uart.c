@@ -4,19 +4,18 @@
 #include "uart.h"
 
 void uart_init(){
-	//Activation horloge port B
+	//Activation horloge port B 0x4002104C
 	SET_BIT(RCC->AHB2ENR, RCC_AHB2ENR_GPIOBEN);
-	//Passage en mode Alternate function PB7 10 RX
-	MODIFY_REG(GPIOB->MODER, GPIO_MODER_MODE7_0, GPIO_MODER_MODE7_1);
-	//Passage en mode Alternate function PB6 10 TX
-	MODIFY_REG(GPIOB->MODER, GPIO_MODER_MODE6_0, GPIO_MODER_MODE6_1);	
-	//Activation registre AFRL mode AF7 pour PB6 et PB7
+	//Passage en mode Alternate function PB7 et PB6 10 RX 0x48000400
+	MODIFY_REG(GPIOB->MODER, GPIO_MODER_MODE7_0|GPIO_MODER_MODE6_0, GPIO_MODER_MODE7_1 | GPIO_MODER_MODE6_1 ) ;
+	//Activation registre AFRL mode AF7 pour PB6 et PB7 0x48000420
 	WRITE_REG( GPIOB->AFR[0] , 0x77000000);
-	//Activation de l'horloge de USART1
+	//Activation de l'horloge de USART1 
 	SET_BIT(RCC->APB2ENR, RCC_APB2ENR_USART1EN);
 	//Specifier l'horloge de USART1 en PCLK 00
-	CLEAR_BIT(RCC->CCIPR, (RCC_CCIPR_USART1SEL_Pos | RCC_CCIPR_USART1SEL_0));	
+	CLEAR_BIT(RCC->CCIPR, RCC_CCIPR_USART1SEL_Msk);	
 	//Reset du port APB2
+	SET_BIT(RCC->APB2RSTR, RCC_APB2RSTR_USART1RST);
 	CLEAR_REG(RCC->APB2RSTR);
 	//Configuration de la vitesse 80M/115200=694d=0x2B6
 	WRITE_REG(USART1->BRR, 0x2B6);
