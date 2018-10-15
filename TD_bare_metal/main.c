@@ -26,17 +26,19 @@ void wait(int n){
 
 int main(){
 	//Test de toutes les fonctions
-	uint8_t s[size];
+	//uint8_t s[size];
 	clocks_init();
-	uart_init();
+	//uart_init();
 	matrix_init();
-	wait(10000);
+	deactivate_rows();
+	test_pixels();
+	/*wait(10000);
 	while(1){
 		uart_gets(s, size);
 		uart_puts( (const uint8_t *) "Hello Word !");
 		uart_puts(s);	
 	}
 	//test = checksum();
-
+	*/
 	return 0;
 }

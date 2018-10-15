@@ -16,7 +16,7 @@ void matrix_init(){
 	SET_BIT(GPIOB->BSRR, GPIO_BSRR_BR1 | GPIO_BSRR_BR2 | GPIO_BSRR_BR0);
 	wait(10000);
 	SET_BIT(GPIOC->BSRR, GPIO_BSRR_BS3);	
-
+	init_bank0();
 }
 
 void deactivate_rows(){
@@ -46,7 +46,7 @@ void activate_rows(int row){
 
 void send_byte(uint8_t val, int bank){
 	SB(bank);
-	for(int i= bank?8:5; i>=0; i--){
+	for(int i= bank?7:5; i>=0; i--){
 		SDA(val & (1<<i));
 		pulse_SCK();
 	}	
@@ -54,21 +54,43 @@ void send_byte(uint8_t val, int bank){
 
 void mat_set_row(int row, const rgb_color *val){
 	for(int i=7; i>=0;i--){
-		send_byte(val[i]->b, 1);
-		send_byte(val[i]->g, 1);
-		send_byte(val[i]->r, 1);
+		send_byte(val[i].b, 1);
+		send_byte(val[i].g, 1);
+		send_byte(val[i].r, 1);
 	}
-	activate_row(row);
+	deactivate_rows();
+	activate_rows(row);
 	pulse_LAT();
 }
 
 void init_bank0(){
-	for(int i=5; i>=0;i--){
-		send_byte(val[i]->b, 1);
-		send_byte(val[i]->g, 1);
-		send_byte(val[i]->r, 1);
+	for(int i=0; i<24;i++){
+		send_byte(0xff, 0);
 	}
-	activate_row(row);
 	pulse_LAT();
 }
-	
+
+void test_pixels(){
+	rgb_color reds[8];
+	rgb_color blues[8];
+	rgb_color greens[8];
+	for(int i=0;i<8;i++){
+		reds[i].r = ((0xff)>>i);
+		blues[i].b = ((0xff)>>i);
+		greens[i].g = ((0xff)>>i);
+		reds[i].b = 0;
+		reds[i].g = 0;
+		blues[i].r = 0;
+		blues[i].g = 0;
+		greens[i].r = 0;
+		greens[i].b = 0;
+	}
+	for(int i=0;i<8;i++){
+		mat_set_row(i,reds);
+		wait(5000000);
+		mat_set_row(i,blues);
+		wait(5000000);
+		mat_set_row(i,greens);
+		wait(5000000);		
+	}
+}
