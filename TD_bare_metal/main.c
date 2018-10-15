@@ -30,7 +30,7 @@ int main(){
 	clocks_init();
 	uart_init();
 	while(1){
-		uart_putchar( (uint8_t) 'u');
+		uart_puts( (const uint8_t *) "Hello Word !");
 		uart_getchar();		
 	}
 	//test = checksum();
