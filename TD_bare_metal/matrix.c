@@ -19,28 +19,27 @@ void matrix_init(){
 
 }
 
-void pulse_SCK(){
-	SCK(0);
-	wait(3);
-	SCK(1);
-	wait(3);
-	SCK(0);
-	wait(3);
-}
-
-void pulse_LAT(){
-	LAT(1);
-	wait(3);
-	LAT(0);
-	wait(1);
-	LAT(1);
-	wait(3);
-}
-
 void deactivate_rows(){
-
+	ROW0(0);
+	ROW1(0);
+	ROW2(0);
+	ROW3(0);
+	ROW4(0);
+	ROW5(0);
+	ROW6(0);
+	ROW7(0);
 }
 
-void activate_rows(){
-
+void activate_rows(int row){
+	switch(row){
+		case 0: ROW0(1); break;
+		case 1: ROW1(1); break;
+		case 2: ROW2(1); break;
+		case 3: ROW3(1); break;
+		case 4: ROW4(1); break;
+		case 5: ROW5(1); break;
+		case 6: ROW6(1); break;
+		case 7: ROW7(1); break;
+		default: deactivate_rows();
+	}	
 }	

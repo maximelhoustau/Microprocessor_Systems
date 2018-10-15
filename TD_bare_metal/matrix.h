@@ -14,8 +14,35 @@
 #define LAT(x) 		WRITE_REG(GPIOC->BSRR, x?GPIO_BSRR_BS4:GPIO_BSRR_BR4)
 #define SCK(x)	 	WRITE_REG(GPIOB->BSRR, x?GPIO_BSRR_BS1:GPIO_BSRR_BR1)
 #define SDA(x) 		WRITE_REG(GPIOA->BSRR, x?GPIO_BSRR_BS4:GPIO_BSRR_BR4)
+#define pulse_SCK() \
+	do { \
+		SCK(0); \
+		wait(3); \
+		SCK(1); \
+		wait(3); \
+		SCK(0); \
+		wait(3); } \
+	while(0)
+
+#define pulse_LAT() \
+	do { \
+		LAT(1); \
+		wait(3); \
+		LAT(0); \
+		wait(1); \
+		LAT(1); \
+		wait(3); } \
+	while(0)
 
 void matrix_init(void);
-void pulse_SCK(void);
+void deactivate_rows(void);
+void activate_rows(int row);
+void send_byte(uint8_t val, int bank);
+
+typedef struct {
+  uint8_t r;
+  uint8_t g;
+  uint8_t b;
+} rgb_color;
 
 #endif
