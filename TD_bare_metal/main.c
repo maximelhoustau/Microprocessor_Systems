@@ -3,9 +3,9 @@
 #include "led.h"
 #include "clocks.h"
 #include "uart.h"
+#include "main.h"
+#include "matrix.h"
 
-int fibo(int n);
-void wait(int n);
 size_t size = 1024;
 uint32_t test;
 
@@ -29,6 +29,7 @@ int main(){
 	uint8_t s[size];
 	clocks_init();
 	uart_init();
+	matrix_init();
 	wait(10000);
 	while(1){
 		uart_gets(s, size);
