@@ -30,7 +30,8 @@ int main(){
 	clocks_init();
 	uart_init();
 	while(1){
-		uart_putchar( 4 );		
+		uart_putchar( (uint8_t) 'u');
+		uart_getchar();		
 	}
 	//test = checksum();
 
