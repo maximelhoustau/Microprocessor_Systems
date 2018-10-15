@@ -38,6 +38,8 @@ void matrix_init(void);
 void deactivate_rows(void);
 void activate_rows(int row);
 void send_byte(uint8_t val, int bank);
+void mat_set_row(int row, const rgb_color *val);
+void init_bank0();
 
 typedef struct {
   uint8_t r;
