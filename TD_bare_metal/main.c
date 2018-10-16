@@ -26,13 +26,19 @@ void wait(int n){
 
 int main(){
 	//Test de toutes les fonctions
-	uint8_t s[size];
+	//uint8_t s[size];
+	uint32_t sum;
 	clocks_init();
 	uart_init();
-	wait(100000);
+	//wait(10000);
+	sum = checksum();
+	//wait(10000);
+	//uart_puts( (const uint8_t *) "Ok\n");
+	//uart_puts( (const uint8_t *) sum);
+	/*
 	while(1){
 		uart_gets(s, size);
 		uart_puts(s);	
-	}
-	return 0;
+	} */
+	return sum;
 }
