@@ -87,10 +87,11 @@ void test_pixels(){
 	}
 	for(int i=0;i<8;i++){
 		mat_set_row(i,reds);
-		wait(5000000);
+		wait(1000000);
 		mat_set_row(i,blues);
-		wait(5000000);
+		wait(1000000);
 		mat_set_row(i,greens);
-		wait(5000000);		
+		wait(1000000);		
 	}
 }
+

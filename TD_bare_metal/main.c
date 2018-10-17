@@ -8,6 +8,7 @@
 
 size_t size = 1024;
 uint32_t test;
+extern uint8_t _binary_image_raw_start;
 
 //Calcul des termes de la suite de Fibonacci
 int fib(int n){
@@ -24,21 +25,21 @@ void wait(int n){
 	}
 }
 
+void test_image(){
+	rgb_color *start = (rgb_color *)  &_binary_image_raw_start;
+	for (int i=0;i<8;i++){
+		mat_set_row(i, (start+24*i));
+		wait(1000);
+	}
+}
+
 int main(){
-	//Test de toutes les fonctions
-	//uint8_t s[size];
-	uint32_t sum;
 	clocks_init();
-	uart_init();
-	//wait(10000);
-	sum = checksum();
-	//wait(10000);
-	//uart_puts( (const uint8_t *) "Ok\n");
-	//uart_puts( (const uint8_t *) sum);
-	/*
+	matrix_init();
+	test_pixels();
+	wait(1000000);
 	while(1){
-		uart_gets(s, size);
-		uart_puts(s);	
-	} */
-	return sum;
+		test_image();
+	}
+	return 0;
 }

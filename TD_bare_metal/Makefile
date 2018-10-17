@@ -8,13 +8,18 @@ LDFLAGS = -T ld_ram.lds -nostdlib
 CPPFLAGS += -DSTM32L475xx 
 
 SOURCES = main.c led.c uart.c matrix.c
-OBJS = main.o crt0.o init.o led.o uart.o matrix.o
+OBJS = main.o crt0.o init.o led.o uart.o matrix.o image.o
 ASS = crt0.s
 LDSCRIPT = ld_ram.lds
 EXE = main 
 VPATH = clocks
 
+
 main: $(OBJS) clocks.o 
+
+image.o:
+	arm-none-eabi-objcopy -I binary -O elf32-littlearm -B arm image.raw image.o
+
 
 start: .gdbinit
 	JLinkGDBServer -device STM32L475VG -endian little -if SWD -speed auto -ir -LocalhostOnly
