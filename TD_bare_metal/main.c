@@ -26,9 +26,9 @@ void wait(int n){
 }
 
 void test_image(){
-	rgb_color *start = (rgb_color *)  &_binary_image_raw_start;
+	rgb_color * start = (rgb_color *)  &_binary_image_raw_start;
 	for (int i=0;i<8;i++){
-		mat_set_row(i, (start+24*i));
+		mat_set_row(i, (rgb_color *)(start+8*i));
 		wait(1000);
 	}
 }
