@@ -4,6 +4,17 @@
 #include "main.h"
 
 void matrix_init(){
+	    // Set output pins to high speed mode
+    	MODIFY_REG(GPIOA->OSPEEDR, 0, GPIO_OSPEEDR_OSPEED2_Msk | GPIO_OSPEEDR_OSPEED3_Msk |
+               GPIO_OSPEEDR_OSPEED4_Msk | GPIO_OSPEEDR_OSPEED5_Msk |
+               GPIO_OSPEEDR_OSPEED6_Msk | GPIO_OSPEEDR_OSPEED7_Msk |
+               GPIO_OSPEEDR_OSPEED15_Msk);
+
+    	MODIFY_REG(GPIOB->OSPEEDR, 0,
+               GPIO_OSPEEDR_OSPEED0_Msk | GPIO_OSPEEDR_OSPEED1_Msk | GPIO_OSPEEDR_OSPEED2_Msk);
+
+    	MODIFY_REG(GPIOC->OSPEEDR, 0,
+               GPIO_OSPEEDR_OSPEED3_Msk | GPIO_OSPEEDR_OSPEED4_Msk | GPIO_OSPEEDR_OSPEED5_Msk);
 	//Activation des horloges des ports A, B et C
 	SET_BIT(RCC->AHB2ENR, RCC_AHB2ENR_GPIOAEN | RCC_AHB2ENR_GPIOBEN | RCC_AHB2ENR_GPIOCEN);
 	//Activation des différentes broches PC3,4,5 PB0,1,2 PA2,3,4,5,6,7,15
