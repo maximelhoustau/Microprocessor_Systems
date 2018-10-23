@@ -3,7 +3,7 @@
 #include "stm32l4xx.h"
 #include "uart.h"
 
-void uart_init(){
+void uart_init(int baudrate){
 	//Activation horloge port B 0x4002104C
 	SET_BIT(RCC->AHB2ENR, RCC_AHB2ENR_GPIOBEN);
 	//Passage en mode Alternate function PB7 et PB6 10 RX 0x48000400
@@ -19,7 +19,7 @@ void uart_init(){
 	SET_BIT(RCC->APB2RSTR, RCC_APB2RSTR_USART1RST);
 	CLEAR_BIT(RCC->APB2RSTR, RCC_APB2RSTR_USART1RST);
 	//Configuration de la vitesse 80M/115200=694d=0x2B6
-	WRITE_REG(USART1->BRR, 0x2B6);
+	WRITE_REG(USART1->BRR, 80000000/baudrate);
 	//Initialisation des registres, oversampling à 16 et passage à 8N1
 	USART1->CR1 = 0;
 	//Activation UE, RE, TE
