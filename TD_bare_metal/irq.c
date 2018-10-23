@@ -108,7 +108,7 @@ MAKE_DEFAULT_HANDLER(DMA2D_IRQHandler)
 void *vector_table[] = {
     // Stack and Reset Handler
     &_stack,            /* Top of stack */
-    _start,             /* Reset handler */
+    &_start,             /* Reset handler */
 
     // ARM internal exceptions
     NMI_Handler,        /* NMI handler */
@@ -220,5 +220,5 @@ void *vector_table[] = {
 };
 
 void irq_init(){
-	SCB->VTOR = _vector_table;
+	SCB->VTOR = (uint32_t) vector_table;
 }

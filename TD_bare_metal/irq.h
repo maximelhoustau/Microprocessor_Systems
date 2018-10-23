@@ -4,7 +4,7 @@
 #define MAKE_DEFAULT_HANDLER(handler) \
 		void __attribute__((weak)) handler(){\
 			__disable_irq();\
-			while(1)}
+			while(1);}
 
 void irq_init(void);
 
