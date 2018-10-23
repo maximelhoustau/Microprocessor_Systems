@@ -9,6 +9,7 @@
 		}\
 	}\
 	while(0)
-	
+
+void irq_init(void);
 
 #endif

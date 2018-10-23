@@ -1,4 +1,8 @@
+#include <stdint.h>
+#include "stm32l4xx.h"
+#include "irq.h"
 
+extern uint8_t _stack, _start ;
 
 void *vector_table[] = {
     // Stack and Reset Handler
@@ -25,4 +29,8 @@ void *vector_table[] = {
     WWDG_IRQHandler,         /* Watchdog IRQ */
     PVD_PVM_IRQHandler,      /* ... */
     TAMP_STAMP_IRQHandler,   /* ... */
+}
+
+void irq_init(){
+
 }
