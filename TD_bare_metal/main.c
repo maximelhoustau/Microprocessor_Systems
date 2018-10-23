@@ -6,6 +6,7 @@
 #include "main.h"
 #include "matrix.h"
 #include "irq.h"
+#include "buttons.h"
 
 size_t size = 1024;
 uint32_t test;
@@ -36,6 +37,12 @@ void test_image(){
 
 int main(){
 	clocks_init();
+	matrix_init();
+	button_init();
+	led_init();
 	irq_init();
+	while(1){
+		test_image();
+	}
 	return 0;
 }

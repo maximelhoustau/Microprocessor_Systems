@@ -220,5 +220,5 @@ void *vector_table[] = {
 };
 
 void irq_init(){
-	SCB->VTOR = (uint32_t) vector_table;
+	SCB->VTOR = (uint32_t) &vector_table;
 }
