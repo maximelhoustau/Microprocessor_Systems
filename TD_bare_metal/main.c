@@ -37,11 +37,5 @@ void test_image(){
 int main(){
 	clocks_init();
 	irq_init();
-	matrix_init();
-	test_pixels();
-	wait(1000000);
-	while(1){
-		test_image();
-	}
 	return 0;
 }
