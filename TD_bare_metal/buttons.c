@@ -14,6 +14,7 @@ void button_init(){
 	
 }
 
+//Redéfinition de l'interruption sur le handler EXTI15_10
 void EXTI15_10_IRQHandler(){
 	SET_BIT(EXTI->PR1, EXTI_PR1_PIF13);
 	led_g_on();

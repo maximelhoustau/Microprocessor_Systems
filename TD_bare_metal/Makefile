@@ -27,6 +27,8 @@ pico:
 	picocom -b 115200 -f n -p n -d 8 --omap crlf /dev/cu.usbmodem1421
 gdb: main
 	arm-none-eabi-gdb main
+serie:
+	sh ./stty.sh
 
 clean:
 	rm -f $(OBJS) $(EXE)
