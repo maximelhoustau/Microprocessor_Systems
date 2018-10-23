@@ -10,7 +10,7 @@ void button_init(){
 	SET_BIT(EXTI->FTSR1, EXTI_FTSR1_FT13);
 	CLEAR_BIT(EXTI->RTSR1, EXTI_RTSR1_RT13);
 	SYSCFG->EXTICR[3] |= 0x20;	
-	NVIC_EnableIRQ(EXTI15_10_IRQn);
+	NVIC_EnableIRQ(40);
 	
 }
 
@@ -20,3 +20,5 @@ void EXTI15_10_IRQHandler(){
 	wait(1000000);
 	led_g_off();
 }
+
+

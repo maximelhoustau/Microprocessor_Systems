@@ -105,7 +105,7 @@ MAKE_DEFAULT_HANDLER(DMA2D_IRQHandler)
 
 
 	   
-void *vector_table[] = {
+__attribute__((aligned (256))) void *vector_table[] = {
     // Stack and Reset Handler
     &_stack,            /* Top of stack */
     &_start,             /* Reset handler */
