@@ -5,6 +5,7 @@
 #include "uart.h"
 #include "main.h"
 #include "matrix.h"
+#include "irq.h"
 
 size_t size = 1024;
 uint32_t test;
@@ -35,6 +36,7 @@ void test_image(){
 
 int main(){
 	clocks_init();
+	irq_init();
 	matrix_init();
 	test_pixels();
 	wait(1000000);
