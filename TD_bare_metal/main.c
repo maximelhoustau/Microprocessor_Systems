@@ -41,6 +41,8 @@ int main(){
 	button_init();
 	led_init();
 	irq_init();
+	frame_init();
+	uart_init(38400);
 	while(1){
 		display(current_frame.pixels);
 	}

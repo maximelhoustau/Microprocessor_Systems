@@ -3,6 +3,8 @@
 #include "matrix.h"
 #include "main.h"
 
+frame current_frame;
+
 void matrix_init(){
 	    // Set output pins to high speed mode
     	MODIFY_REG(GPIOA->OSPEEDR, 0, GPIO_OSPEEDR_OSPEED2_Msk | GPIO_OSPEEDR_OSPEED3_Msk |

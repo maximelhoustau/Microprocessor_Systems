@@ -27,6 +27,15 @@ void uart_init(int baudrate){
 	SET_BIT(USART1->CR1, USART_CR1_UE | USART_CR1_RE | USART_CR1_TE);
 }
 
+//A appeler après uart_init()
+void frame_init(){
+	current_frame.position = 0;
+	//Active les interruptions quand le registre de lecture contient qqchose
+	SET_BIT(USART1->CR1, USART_CR1_RXNEIE);
+	//Active les IRQ sur USART1
+	NVIC_EnableIRQ(USART1_IRQn);
+}
+
 void uart_putchar(uint8_t c){
 	while( ! READ_BIT(USART1->ISR, USART_ISR_TXE )) ;
 	WRITE_REG(USART1->TDR, c);
