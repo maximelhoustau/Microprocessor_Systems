@@ -34,14 +34,18 @@
 		wait(3); } \
 	while(0)
 
+//Définition du type pour un pixel
 typedef struct {
   uint8_t r;
   uint8_t g;
   uint8_t b;
 } rgb_color;
 
+//Definition du type pour les pixels envoyés au port série
+//Variable partagée, position pour connaitre le pixel dans lequel on écrit
 typedef struct __attribute__((__packed__)){
 	rgb_color pixels[64];
+	int position;
 } frame;
 
 void matrix_init(void);

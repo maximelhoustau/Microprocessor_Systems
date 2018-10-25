@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include "stm32l4xx.h"
 #include "uart.h"
+#include "matrix.h"
 
 void uart_init(int baudrate){
 	//Activation horloge port B 0x4002104C
@@ -64,5 +65,17 @@ uint32_t checksum(){
 		ope++;
 	}
 	return sum;
+}
+
+void USART1_IRQHandler(){
+	uint8_t byte = uart_getchar();
+	uint8_t * frame = (uint8_t *) current_frame.pixels;
+	if( byte == 0xff){
+		current_frame.position = 0;
+	}
+	else {
+		frame[current_frame.position] = byte;
+		current_frame.position++;
+	}
 }
 
