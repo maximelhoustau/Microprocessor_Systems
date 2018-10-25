@@ -42,7 +42,7 @@ int main(){
 	led_init();
 	irq_init();
 	while(1){
-		test_image();
+		display(current_frame.pixels);
 	}
 	return 0;
 }

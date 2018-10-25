@@ -106,3 +106,9 @@ void test_pixels(){
 	}
 }
 
+void display(rgb_color * frame){
+	for(int i=0;i<8;i++){
+		mat_set_row(i, frame+(8*i));
+	}
+}
+
