@@ -9,6 +9,10 @@ _stack = ORIGIN(sram2)+LENGTH(sram2) ;
 
  SECTIONS
  {
+.INTERRUPT_TABLE : {
+	vector_table = . ;
+	irq.o(.INTERRUPT_TABLE)
+	} >sram1
 .text : {
 	*(.text) } > sram1
 .rodata : {
