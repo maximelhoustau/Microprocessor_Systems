@@ -43,6 +43,7 @@ int main(){
 	irq_init();
 	frame_init();
 	uart_init(38400);
+	frame_init();
 	while(1){
 		display(current_frame.pixels);
 	}

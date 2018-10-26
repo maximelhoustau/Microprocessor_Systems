@@ -76,6 +76,7 @@ uint32_t checksum(){
 	return sum;
 }
 
+//Redefinition du Handler sur USART1 pour les envois de trames
 void USART1_IRQHandler(){
 	uint8_t byte = uart_getchar();
 	uint8_t * frame = (uint8_t *) current_frame.pixels;

@@ -66,14 +66,15 @@ void send_byte(uint8_t val, int bank){
 }
 
 void mat_set_row(int row, const rgb_color *val){
+	deactivate_rows();
 	for(int i=7; i>=0;i--){
 		send_byte(val[i].b, 1);
 		send_byte(val[i].g, 1);
 		send_byte(val[i].r, 1);
 	}
-	deactivate_rows();
-	activate_rows(row);
 	pulse_LAT();
+	wait(100);
+	activate_rows(row);
 }
 
 void init_bank0(){
@@ -111,6 +112,7 @@ void test_pixels(){
 void display(rgb_color * frame){
 	for(int i=0;i<8;i++){
 		mat_set_row(i, frame+(8*i));
+		wait(1000);
 	}
 }
 
