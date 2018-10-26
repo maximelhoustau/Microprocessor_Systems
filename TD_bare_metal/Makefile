@@ -7,8 +7,8 @@ TARGET_MACH = $(TARGET_ARCH)
 LDFLAGS = -T ld_ram.lds -nostdlib
 CPPFLAGS += -DSTM32L475xx 
 
-SOURCES = main.c led.c uart.c matrix.c irq.c buttons.c
-OBJS = main.o crt0.o init.o led.o uart.o matrix.o image.o irq.o buttons.o
+SOURCES = main.c led.c uart.c matrix.c irq.c buttons.c clocks.c
+OBJS = main.o crt0.o init.o led.o uart.o matrix.o image.o irq.o buttons.o clocks.o
 ASS = crt0.s
 LDSCRIPT = ld_ram.lds
 EXE = main 
