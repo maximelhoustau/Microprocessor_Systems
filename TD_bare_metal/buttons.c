@@ -18,7 +18,7 @@ void button_init(){
 void EXTI15_10_IRQHandler(){
 	SET_BIT(EXTI->PR1, EXTI_PR1_PIF13);
 	led_g_on();
-	wait(1000000);
+	wait(10000000);
 	led_g_off();
 }
 

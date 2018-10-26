@@ -42,8 +42,8 @@ void uart_putchar(uint8_t c){
 }
 
 uint8_t uart_getchar(){
-	while ( ! READ_BIT( USART1->ISR, USART_ISR_RXNE)) ;
-	return  (uint8_t) READ_REG(USART1->RDR) ;
+	while ( ! READ_BIT( USART1->ISR, USART_ISR_RXNE));
+	return  (uint8_t) READ_REG(USART1->RDR);
 }
 
 void uart_puts(const uint8_t *s){
@@ -80,12 +80,24 @@ uint32_t checksum(){
 void USART1_IRQHandler(){
 	uint8_t byte = uart_getchar();
 	uint8_t * frame = (uint8_t *) current_frame.pixels;
-	if( byte == 0xff){
+	
+	if (READ_BIT(USART1->ISR, USART_ISR_FE) | READ_BIT(USART1->ISR, USART_ISR_ORE)){
+		SET_BIT(USART1->ICR, USART_ICR_ORECF | USART_ICR_FECF);
+		current_frame.position =0;
+		for(int i=0;i<192;i++){
+			frame[i] = 0;
+		}	
+		return;
+	}
+	
+	else if( byte == 0xff || current_frame.position > 192 ){
 		current_frame.position = 0;
 	}
 	else {
 		frame[current_frame.position] = byte;
 		current_frame.position++;
 	}
+	
+
 }
 
