@@ -8,17 +8,8 @@
 #include "irq.h"
 #include "buttons.h"
 
-size_t size = 1024;
-uint32_t test;
+size_t const size = 1024;
 extern uint8_t _binary_image_raw_start;
-
-//Calcul des termes de la suite de Fibonacci
-int fib(int n){
-  	if (n < 2)
-    		return n;
- 	 else
-    		return fib(n-1) + fib(n-2);
-}
 
 //Permet de voir clignoter les leds
 void wait(int n){

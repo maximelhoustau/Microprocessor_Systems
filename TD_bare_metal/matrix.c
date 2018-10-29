@@ -32,7 +32,7 @@ void matrix_init(){
 	init_bank0();
 }
 
-void deactivate_rows(){
+static void deactivate_rows(){
 	ROW0(0);
 	ROW1(0);
 	ROW2(0);
@@ -43,7 +43,7 @@ void deactivate_rows(){
 	ROW7(0);
 }
 
-void activate_rows(int row){
+static void activate_rows(int row){
 	switch(row){
 		case 0: ROW0(1); break;
 		case 1: ROW1(1); break;
@@ -57,7 +57,7 @@ void activate_rows(int row){
 	}	
 }
 
-void send_byte(uint8_t val, int bank){
+static void send_byte(uint8_t val, int bank){
 	SB(bank);
 	for(int i= bank?7:5; i>=0; i--){
 		SDA(val & (1<<i));

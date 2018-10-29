@@ -36,12 +36,12 @@ void frame_init(){
 	NVIC_EnableIRQ(USART1_IRQn);
 }
 
-void uart_putchar(uint8_t c){
+static void uart_putchar(uint8_t c){
 	while( ! READ_BIT(USART1->ISR, USART_ISR_TXE )) ;
 	WRITE_REG(USART1->TDR, c);
 }
 
-uint8_t uart_getchar(){
+static uint8_t uart_getchar(){
 	while ( ! READ_BIT( USART1->ISR, USART_ISR_RXNE));
 	return  (uint8_t) READ_REG(USART1->RDR);
 }
