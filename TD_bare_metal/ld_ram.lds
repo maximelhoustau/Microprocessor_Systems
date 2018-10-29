@@ -5,28 +5,38 @@ MEMORY
  sram2 (wx) : ORIGIN = 0x10000000, LENGTH = 32K
  }
 
-_stack = ORIGIN(sram2)+LENGTH(sram2) ;
-
  SECTIONS
  {
 .INTERRUPT_TABLE : {
-	vector_table = . ;
+	_vector_table = . ;
 	irq.o(.INTERRUPT_TABLE)
-	} >sram1
+	_vector_table_end = . ;
+	} > rom AT > sram1
 .text : {
-	*(.text) } > sram1
+	_text = .;
+	*(.text) 
+	_text_end = . ;
+	} > rom AT > sram1
 .rodata : {
 	*(.rodata)
-    } > sram1
+    } > rom
 .data  : {
     	_data = . ;
     	*(.data)
-    } > sram1
+	_data_end = . ;
+    } > rom AT > sram1
 .bss  : {
 	 _bss = . ;
 	*(.bss) *(COMMON)
-    	_bss_size = . ;
-    } > sram1
+    	_bss_end = . ;
+    } > rom AT > sram1
  }
 
 ENTRY(_start)
+_stack = ORIGIN(sram2)+LENGTH(sram2) ;
+_vector_table_LMA = ORIGIN(.INTERRUPT_TABLE);
+_text_LMA = ORIGIN(.text);
+_data_LMA = ORIGIN(.data);
+_bss_LMA = ORIGIN(.bss);
+
+

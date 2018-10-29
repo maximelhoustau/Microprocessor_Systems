@@ -36,7 +36,7 @@ int main(){
 	uart_init(38400);
 	frame_init();
 	while(1){
-		display(current_frame.pixels);
+		test_image();
 	}
 	return 0;
 }

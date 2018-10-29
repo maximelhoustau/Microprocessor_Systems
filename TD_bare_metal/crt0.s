@@ -5,8 +5,8 @@
 /*On initialise le sp en haut de la pile (descendante) puis branchement à main */
 	.thumb_func
 _start:
-    ldr sp, =_stack
     bl init_bss
+    bl recopie 
     bl main
 
 /*boucle infinie pour terminer l'exercice*/
